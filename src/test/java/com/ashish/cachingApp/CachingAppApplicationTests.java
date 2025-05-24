@@ -1,4 +1,4 @@
-package com.codingshuttle.cachingApp;
+package com.ashish.cachingApp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

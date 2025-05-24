@@ -1,6 +1,6 @@
-package com.codingshuttle.cachingApp.repositories;
+package com.ashish.cachingApp.repositories;
 
-import com.codingshuttle.cachingApp.entities.Employee;
+import com.ashish.cachingApp.entities.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

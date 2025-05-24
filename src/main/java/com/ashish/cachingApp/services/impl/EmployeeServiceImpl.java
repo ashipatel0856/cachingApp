@@ -1,14 +1,14 @@
-package com.codingshuttle.cachingApp.services.impl;
+package com.ashish.cachingApp.services.impl;
 
-import com.codingshuttle.cachingApp.dto.EmployeeDto;
-import com.codingshuttle.cachingApp.entities.Employee;
-import com.codingshuttle.cachingApp.exceptions.ResourceNotFoundException;
-import com.codingshuttle.cachingApp.repositories.EmployeeRepository;
-import com.codingshuttle.cachingApp.services.EmployeeService;
-import com.codingshuttle.cachingApp.services.SalaryAccountService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.ashish.cachingApp.dto.EmployeeDto;
+import com.ashish.cachingApp.entities.Employee;
+import com.ashish.cachingApp.exceptions.ResourceNotFoundException;
+import com.ashish.cachingApp.repositories.EmployeeRepository;
+import com.ashish.cachingApp.services.EmployeeService;
+import com.ashish.cachingApp.services.SalaryAccountService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,15 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Slf4j
 @Service
-@RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final SalaryAccountService salaryAccountService;
     private final ModelMapper modelMapper;
     private final String CACHE_NAME = "employees";
+    private static final Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, SalaryAccountService salaryAccountService, ModelMapper modelMapper) {
+        this.employeeRepository = employeeRepository;
+        this.salaryAccountService = salaryAccountService;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     @Cacheable(cacheNames = CACHE_NAME, key = "#id")
@@ -39,6 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.info("Successfully fetched employee with id: {}", id);
         return modelMapper.map(employee, EmployeeDto.class);
     }
+
 
     @Override
     @CachePut(cacheNames = CACHE_NAME, key = "#result.id")

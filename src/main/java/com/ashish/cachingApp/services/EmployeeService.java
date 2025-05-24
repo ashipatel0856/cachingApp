@@ -1,7 +1,7 @@
-package com.codingshuttle.cachingApp.services;
+package com.ashish.cachingApp.services;
 
 
-import com.codingshuttle.cachingApp.dto.EmployeeDto;
+import com.ashish.cachingApp.dto.EmployeeDto;
 
 public interface EmployeeService {
 

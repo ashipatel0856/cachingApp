@@ -1,9 +1,9 @@
-package com.codingshuttle.cachingApp.services.impl;
+package com.ashish.cachingApp.services.impl;
 
-import com.codingshuttle.cachingApp.entities.Employee;
-import com.codingshuttle.cachingApp.entities.SalaryAccount;
-import com.codingshuttle.cachingApp.repositories.SalaryAccountRepository;
-import com.codingshuttle.cachingApp.services.SalaryAccountService;
+import com.ashish.cachingApp.entities.Employee;
+import com.ashish.cachingApp.entities.SalaryAccount;
+import com.ashish.cachingApp.repositories.SalaryAccountRepository;
+import com.ashish.cachingApp.services.SalaryAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,11 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 
 @Service
-@RequiredArgsConstructor
 @Transactional(propagation = Propagation.REQUIRED)
 public class SalaryAccountServiceImpl implements SalaryAccountService {
 
     private final SalaryAccountRepository salaryAccountRepository;
+
+    public SalaryAccountServiceImpl(SalaryAccountRepository salaryAccountRepository) {
+        this.salaryAccountRepository = salaryAccountRepository;
+    }
 
     @Override
     public void createAccount(Employee employee) {
